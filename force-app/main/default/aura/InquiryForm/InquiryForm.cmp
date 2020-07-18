@@ -1,0 +1,62 @@
+<aura:component controller = "InquiryFormController" implements="force:appHostable">
+    <lightning:overlayLibrary aura:id="overlayLib"/> 
+    <aura:attribute name="CustomerList" type="List" default=""/>
+    <aura:attribute name="ContactNo" type="Integer" default=""/>
+    <aura:attribute name="ProductList" type="List" default=""/>
+    <aura:attribute name="FollowupChecked" type="boolean" default = "false"/>
+    <aura:attribute name="Date1" type="Date" default=""/>
+    <aura:attribute name="srcInquiry" type="String" default=""/>
+    <aura:attribute name="Quotation" type="Integer" default=""/>
+    <aura:attribute name="Followupdate" type="Date" default=""/>
+    <aura:attribute name="Description" type="String" default=""/>
+    <aura:attribute name="DisclaimerValue" type="Boolean" default="false"/>
+    <aura:attribute name="TrialInParent" type="String" default=""/>
+    
+    <div class="slds-modal__content slds-p-around--medium slds-grid slds-wrap ">
+        <div class="slds-p-bottom_large slds-p-left_large" style="width:650px">            
+            <lightning:input type="date" name="date" label ="Date" value ="{!v.Date1}" aura:id="fieldId" required="true" class="slds-size--4-of-7"/>
+            	<div class="slds-list_horizontal slds-wrap">
+                    <lightning:select aura:id = "Customer" name="Customer" label="Customer" required="true" onchange="{!c.onChange}" class="slds-size--4-of-7" >
+                         <option value="">None</option>
+                             <aura:iteration items="{!v.CustomerList}" var="per">
+                                 <option value="{!per}" text="{!per}" /> 
+                             </aura:iteration>                
+                    </lightning:select>
+                    <lightning:input type="Integer" name="mbNumber" label ="Contact no." aura:id="fieldId" required="true" value = "{!v.ContactNo}" class="slds-size--2-of-7 slds-p-left_x-small" disabled="true"/>
+                    <lightning:icon iconName="utility:add" variant ="container" aura:id = "add" size="small" alternativeText="sss" onclick="{!c.addCustomer}" class="slds-size--1-of-7 slds-p-top_x-large slds-p-bottom_x-small slds-p-left_x-small"/>
+            	</div>
+            
+            <lightning:input type="Text" name="srcInquir" value ="{!v.srcInquiry}" label ="Source of Inquiry" aura:id="fieldId" required="true" class="slds-size--6-of-7"/>
+            
+             <div class="slds-list_horizontal slds-wrap"> 
+                <lightning:select aura:id = "Product" name="Product" label="Product" required="true" onchange="" class="slds-size--6-of-7" >
+                     <option value="">None</option>
+                         <aura:iteration items="{!v.ProductList}" var="per">
+                             <option value="{!per}" text="{!per}" /> 
+                         </aura:iteration>                
+                </lightning:select>
+                <lightning:icon iconName="utility:add" variant ="container" aura:id = "add" size="small" alternativeText="sss" onclick="{!c.addProduct}" class="slds-size--1-of-7 slds-p-top_x-large slds-p-bottom_x-small slds-p-left_x-small"/>
+            </div>
+            <div class="slds-list_horizontal slds-wrap"> 
+                <lightning:select name="Type" label="Status" required="true" aura:id="Status" class="slds-size--3-of-7">
+                            <option value="">None</option>
+                            <option value="In-Progress">In-Progress</option>
+                            <option value="Completed">Completed</option>              
+                </lightning:select>
+                <lightning:input type="number" name="Quotatio" value="{!v.Quotation}" label ="Quotation" aura:id="fieldId" required="true" class="slds-p-left_x-small slds-size--3-of-7"/>
+            </div>
+            <lightning:input type="checkbox" aura:id = "FilterProj" name="Followup" label = "Followup" value = "{!v.DisclaimerValue}" onchange="{!c.FollowupisChecked}" class = "slds-p-top_x-small"/>
+			
+            <aura:if isTrue="{!v.FollowupChecked}">
+                
+                <div class="slds-list_horizontal slds-wrap"> 
+                    <lightning:input type="date" name="Followupdat" value="{!v.Followupdate}" label ="Date" aura:id="field" required="true" class="slds-size--3-of-7"/>
+                    <lightning:input type="TextArea" name="Descriptio" value = "{!v.Description}" label ="Description" aura:id="field" required="true" class="slds-p-left_x-small slds-size--3-of-7"/>
+                </div>
+            </aura:if>
+            <lightning:button aura:id="submit" type="submit" label="Save record" onclick="{!c.handleSubmit}" class="slds-m-top_medium"  />
+            <lightning:button aura:id="cancel" onclick="{!c.handleReset}" label="Reset" class="slds-m-top_medium" />
+        </div>        
+    </div>
+    
+</aura:component>

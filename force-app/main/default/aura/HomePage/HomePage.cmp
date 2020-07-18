@@ -1,0 +1,4 @@
+<aura:component controller = "HomePageController" implements="force:appHostable">
+    <lightning:overlayLibrary aura:id="overlayLib"/>    
+    <lightning:button label = "Add Inquiry" onclick ="{!c.InquiryFormOpen}"/>
+</aura:component>
