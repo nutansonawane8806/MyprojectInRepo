@@ -1,6 +1,6 @@
 <aura:component controller = "APIExampleController" implements="force:appHostable">
     <aura:attribute name="numberInput" type="Decimal" default=""/>
-    
+    Hey Man , This change to test....
     <lightning:input type="Decimal" name="Rupees" value="{!v.numberInput}" label ="Enter Rs." required="true" class="slds-size--3-of-7"/>
 	<lightning:button aura:id="Calculate" label="Calculate" onclick="{!c.Calculate}" class="slds-m-top_medium"  />
 </aura:component>
